@@ -7,9 +7,7 @@ RUN git clone https://github.com/ss0809/core.git
 
 WORKDIR /usr/src/app/core
 
-COPY  script.sh .env ./
-
-RUN chmod +x script.sh
+COPY  .env ./
 
 # Install nvm
 RUN curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
