@@ -4,12 +4,12 @@ services:
     image: 'redislabs/redismod'
     ports:
       - '6379:6379'   
-  web1core:
+  web1:
     restart: on-failure
     build: ./core
     hostname: core
     ports:
-      - '81:5000'
+      - '81:80'
   web2:
     restart: on-failure
     build: ./web
@@ -21,5 +21,5 @@ services:
     ports:
     - '80:80'
     depends_on:
-    - web1core
+    - web1
     - web2
