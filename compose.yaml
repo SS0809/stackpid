@@ -19,7 +19,7 @@ services:
     ports:
       - '82:5000'
   php-environment:
-    container_name: php-apache
+    container_name: portfolio_builder
     build:
       context: ./PortfolioBuilder/php
       dockerfile: Dockerfile
@@ -29,6 +29,17 @@ services:
       - ./PortfolioBuilder/php:/var/www/html/
     ports:
       - 8000:80
+  musicplayer:
+    container_name: music_player
+    build:
+      context: ./MusicPlayer
+      dockerfile: app/Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./MusicPlayer/app:/var/www/html/
+    ports:
+      - 8005:80      
   db:
     image: mysql:5.7
     container_name: db
@@ -40,6 +51,7 @@ services:
       MYSQL_AUTHENTICATION_PLUGIN: caching_sha2_password
     volumes:
       - ./PortfolioBuilder/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./MusicPlayer/init.sql:/docker-entrypoint-initdb.d/init2.sql
   adminer:
     image: adminer
     ports:
