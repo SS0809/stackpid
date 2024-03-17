@@ -4,7 +4,6 @@ WORKDIR /usr/src/app
 
 RUN apt-get update && apt-get install -y git && apt-get install -y curl
 RUN git clone https://github.com/ss0809/core.git
-
 WORKDIR /usr/src/app/core
 
 COPY  .env ./
