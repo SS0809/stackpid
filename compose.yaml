@@ -60,8 +60,6 @@ services:
     build: ./nginx
     ports:
     - '80:80'
-    - '8006:8005'
-    - '8000:8000'
     - '88:88'
     depends_on:
     - web1
