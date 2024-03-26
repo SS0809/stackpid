@@ -18,7 +18,7 @@ services:
     hostname: web2
     ports:
       - '82:5000'
-  php-environment:
+  PortfolioBuilder:
     container_name: portfolio_builder
     build:
       context: ./PortfolioBuilder/php
