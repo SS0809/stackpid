@@ -18,15 +18,15 @@ services:
     hostname: web2
     ports:
       - '82:5000'
-  PortfolioBuilder:
+  portfolioBuilder:
     container_name: portfolio_builder
     build:
-      context: ./PortfolioBuilder/php
+      context: ./portfolioBuilder/php
       dockerfile: Dockerfile
     depends_on:
       - db
     volumes:
-      - ./PortfolioBuilder/php:/var/www/html/
+      - ./portfolioBuilder/php:/var/www/html/
     ports:
       - 8000:80
   musicplayer:
@@ -50,7 +50,7 @@ services:
       MYSQL_PASSWORD: PASS
       MYSQL_AUTHENTICATION_PLUGIN: caching_sha2_password
     volumes:
-      - ./PortfolioBuilder/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./portfolioBuilder/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./MusicPlayer/init.sql:/docker-entrypoint-initdb.d/init2.sql
   adminer:
     image: adminer
@@ -68,6 +68,6 @@ services:
     - web2
     - adminer
     - musicplayer
-    - PortfolioBuilder
+    - portfolioBuilder
     volumes:
       - ./php:/var/www/html/
