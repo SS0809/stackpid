@@ -60,9 +60,14 @@ services:
     build: ./nginx
     ports:
     - '80:80'
+    - 8001:8080   
+    - 8000:8000   
+    - 8005:8005       
     depends_on:
     - web1
     - web2
     - adminer
+    - musicplayer
+    - PortfolioBuilder
     volumes:
       - ./php:/var/www/html/
