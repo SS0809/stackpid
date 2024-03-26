@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  php-environment:
+    container_name: portfolio_builder
+    build:
+      context: ./PortfolioBuilder/php
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./PortfolioBuilder/php:/var/www/html/
+    ports:
+      - 8000:80
+  musicplayer:
+    container_name: music_player
+    build:
+      context: ./MusicPlayer
+      dockerfile: app/Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./MusicPlayer/app:/var/www/html/
+    ports:
+      - 8005:80      
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: ROOT_PASSWORD
+      MYSQL_DATABASE: php-app
+      MYSQL_USER: USER
+      MYSQL_PASSWORD: PASS
+      MYSQL_AUTHENTICATION_PLUGIN: caching_sha2_password
+    volumes:
+      - ./PortfolioBuilder/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./MusicPlayer/init.sql:/docker-entrypoint-initdb.d/init2.sql
+  adminer:
+    image: adminer
+    ports:
+      - 8001:8080      
+  nginx:
+    build: ./nginx
+    ports:
+    - '80:80'
+    depends_on:
+    - adminer
+    volumes:
+      - ./php:/var/www/html/
