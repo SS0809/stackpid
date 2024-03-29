@@ -1,6 +1,20 @@
-version: '3'
+version: '3.1'
 
 services:
+
+  coreUI:
+    restart: on-failure
+    build: ./coreUI
+    hostname: coreUI
+    ports:
+      - '85:3000'
+
+  core:
+    restart: on-failure
+    build: ./core
+    hostname: core
+    ports:
+      - '88:80'
   php-environment:
     container_name: portfolio_builder
     build:
@@ -22,7 +36,7 @@ services:
     volumes:
       - ./MusicPlayer/app:/var/www/html/
     ports:
-      - 8005:80      
+      - 8005:80
   db:
     image: mysql:5.7
     container_name: db
@@ -38,12 +52,14 @@ services:
   adminer:
     image: adminer
     ports:
-      - 8001:8080      
+      - 8001:8080
   nginx:
     build: ./nginx
     ports:
     - '80:80'
     depends_on:
+    - core
+    - coreUI
     - adminer
     volumes:
       - ./php:/var/www/html/
