@@ -59,7 +59,7 @@ services:
     - '80:80'
     depends_on:
     - core
-    - coreUI
+    - coreui
     - adminer
     volumes:
       - ./php:/var/www/html/
