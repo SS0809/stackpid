@@ -7,7 +7,7 @@ services:
     build: ./coreUI
     hostname: coreui
     ports:
-      - '85:3000'
+      - '85:80'
 
   core:
     restart: on-failure
