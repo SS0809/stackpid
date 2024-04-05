@@ -7,5 +7,5 @@ docker-compose version
 yum install git -y 
 
 
-git clone --single-branch --branch dev https://github.com/ss0809/PortfolioBuilder.git && git clone https://github.com/ss0809/MusicPlayer.git && git clone https://github.com/ss0809/core.git && docker-compose up --build && docker system prune -a
+git clone --single-branch --branch dev https://github.com/ss0809/PortfolioBuilder.git && git clone https://github.com/ss0809/MusicPlayer.git && git clone https://github.com/ss0809/coreUI.git && git clone https://github.com/ss0809/core.git && docker-compose up --build && docker system prune -a
 #requires .env and json in core
